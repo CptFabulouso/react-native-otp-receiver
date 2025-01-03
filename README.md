@@ -16,6 +16,9 @@
         - [**Props**](#props-1)
       - [OTPInputCell](#otpinputcell)
         - [**Props**](#props-2)
+    - [hooks](#hooks)
+      - [`useOTPInputCell`](#useotpinputcell)
+      - [`useOTPInputCellState`](#useotpinputcellstate)
   - [Generating app hash](#generating-app-hash)
   - [Message content](#message-content)
     - [Android](#android)
@@ -132,6 +135,7 @@ We try to assume as little as possible about what your code looks like and you s
 | parseEnteredCodeChar | No | `(char: string) => string` | Modify the entered char that user enters via keyboard. E.g. to capitalize it | - |
 | parsePastedCode | No | `(code: string, codeInputShape: number[]) => string[];` | When user pastes copied (or suggested) value, here you can parse the value into input cells. E.g. to parse `ABC-XYZ` into `['ABC', 'XYZ']` | Function that separates string into the input shape |
 | validateCodeChar | No | CodeCharValidator | Each time the code changes, you can validate it. This code runs for each entered character. E.g. to only accept numbers | - |
+| onSMSError | No | `(error: string) => void` | Called when `onSMSReceived` returns error | - |
 
 Example:
 
@@ -246,6 +250,16 @@ TextInput props and:
 | Prop | Required | Type | Description |
 |---|---|---|---|
 | index | **Yes** | number | Index of the input cell |
+
+### hooks
+
+#### `useOTPInputCell`
+
+Returns handles to control TextInput component to capture key presses, text changes and others. Only useful if you do not use [`OTPInputCell`](#otpinputcell) component
+
+#### `useOTPInputCellState`
+
+Returns input cell state (like `value`, `isFocused`) and useful handles e.g. to focus input.
 
 ## Generating app hash
 

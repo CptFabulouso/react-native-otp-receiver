@@ -54,6 +54,7 @@ type Props = {
   children?: ReactNode;
   onCodeEntered?: (data: OnCodeEnteredData) => void;
   onSubmitCode?: (data: OnSubmitCodeData) => void;
+  onSMSError?: (error: string) => void;
   parseSMS?: (sms: string) => string | null | undefined;
   parseEnteredCodeChar?: (char: string) => string;
   parsePastedCode?: (code: string, codeInputShape: number[]) => string[];
@@ -91,6 +92,7 @@ export default function OTPProvider({
   expectSMSOnMount,
   parseEnteredCodeChar,
   validateCodeChar,
+  onSMSError,
   parsePastedCode = defaultPasteParser,
 }: Props) {
   const {
@@ -113,6 +115,10 @@ export default function OTPProvider({
 
   useEffect(() => {
     const listener = onSMSReceived((sms) => {
+      if (sms.error) {
+        onSMSError?.(sms.error);
+        return;
+      }
       const code = parseSMS?.(sms.message || '');
       if (code) {
         setCodeValue(code);
@@ -123,7 +129,7 @@ export default function OTPProvider({
     return () => {
       listener.remove();
     };
-  }, [parseSMS, submitCode, setCodeValue, onCodeEntered]);
+  }, [parseSMS, submitCode, setCodeValue, onCodeEntered, onSMSError]);
 
   useEffect(() => {
     if (expectSMSOnMount) {

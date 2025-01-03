@@ -68,6 +68,10 @@ export function useOTPInputCell({ index }: { index: number }) {
     onChangeText: handleChangeText,
     ref,
     value,
+    submitBehavior:
+      codeInputShape.length - 1 === index
+        ? ('blurAndSubmit' as const)
+        : ('submit' as const),
   };
 }
 
@@ -80,9 +84,14 @@ export function useOTPInputCellState(index: number) {
     return getRef(index);
   }, [getRef, index]);
 
+  const focus = useCallback(() => {
+    _getRef()?.focus();
+  }, [_getRef]);
+
   return {
     isFocused: focusedIndex === index,
     getRef: _getRef,
+    focus,
     value: codeValue[index] || '',
   };
 }
