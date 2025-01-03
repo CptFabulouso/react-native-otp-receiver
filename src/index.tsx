@@ -9,6 +9,6 @@ export {
 export { default as OTPProvider } from './components/OTPProvider';
 export {
   default as OTPInputCell,
-  useOTPInputCellState,
   type OTPInputProps,
 } from './components/OTPInputCell';
+export { useOTPInputCell, useOTPInputCellState } from './hooks';

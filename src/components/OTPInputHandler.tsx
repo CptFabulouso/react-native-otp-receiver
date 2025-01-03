@@ -1,10 +1,7 @@
 import { useCallback, type ReactElement } from 'react';
 import type { OTPInputProps } from './OTPInputCell';
-import OTPProvider, {
-  useOTPContextSelect,
-  useOTPInputContext,
-} from './OTPProvider';
-import { View, TextInput } from 'react-native';
+import OTPProvider, { useOTPContextSelect } from './OTPProvider';
+import { View } from 'react-native';
 import type {
   CodeCharValidator,
   OnCodeEnteredData,
@@ -18,10 +15,7 @@ type ChildrenProps = {
   submitCode: () => void;
 };
 
-export type CodeInputCellComponentProps = OTPInputProps & {
-  isFocused: boolean;
-  getRef: () => TextInput | null;
-};
+export type CodeInputCellComponentProps = OTPInputProps;
 
 type Props = {
   codeInputShape: number[];
@@ -75,23 +69,17 @@ function Handler({
   const codeValue = useOTPContextSelect((v) => v.codeValue);
   const isValid = useOTPContextSelect((v) => v.isCodeValid);
   const codeInputs = useOTPContextSelect((v) => v.codeInputs);
-  const focusedIndex = useOTPContextSelect((v) => v.focusedIndex);
   const submitCode = useOTPContextSelect((v) => v.submitCode);
-
-  const inputProps = useOTPInputContext();
 
   const renderOTPInput = useCallback(() => {
     return codeInputs.map((_, index) => (
       <View key={index}>
         {CodeInputCellComponent({
-          ...inputProps,
           index,
-          isFocused: focusedIndex === index,
-          getRef: () => inputProps.getRef(index),
         })}
       </View>
     ));
-  }, [CodeInputCellComponent, codeInputs, focusedIndex, inputProps]);
+  }, [CodeInputCellComponent, codeInputs]);
 
   return (
     <>

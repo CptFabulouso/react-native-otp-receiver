@@ -3,6 +3,7 @@ import {
   OTPInputHandler,
   OTPInputCell,
   type CodeInputCellComponentProps,
+  useOTPInputCellState,
 } from 'react-native-otp-receiver';
 import styles from './styles';
 
@@ -39,8 +40,9 @@ export default function OTPInputHandlerExample() {
 }
 
 function CodeInputComponent(inputHandles: CodeInputCellComponentProps) {
-  const backgroundColor = inputHandles.isFocused ? 'white' : '#DEDEDE';
-  const borderColor = inputHandles.isFocused ? '#000000' : '#3A4A3A';
+  const { isFocused, getRef } = useOTPInputCellState(inputHandles.index);
+  const backgroundColor = isFocused ? 'white' : '#DEDEDE';
+  const borderColor = isFocused ? '#000000' : '#3A4A3A';
 
   return (
     <TouchableOpacity
@@ -52,7 +54,7 @@ function CodeInputComponent(inputHandles: CodeInputCellComponentProps) {
         },
       ]}
       onPress={() => {
-        inputHandles.getRef()?.focus();
+        getRef()?.focus();
       }}
     >
       <OTPInputCell {...inputHandles} style={styles.otpInput} />
