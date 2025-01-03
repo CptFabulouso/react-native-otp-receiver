@@ -5,7 +5,7 @@ import type {
   TextInputKeyPressEventData,
 } from 'react-native';
 import { TextInput, Platform } from 'react-native';
-import { getPassedText } from '../helpers';
+import { getPastedText } from '../helpers';
 import {
   useOTPContextSelect,
   useOTPInputContext,
@@ -49,7 +49,7 @@ function useOTPInputCell({ index }: { index: number }) {
       if (!changedValue || changedValue.length < fullCodeLength) {
         return;
       }
-      const passedText = getPassedText(currentValue.current, changedValue);
+      const passedText = getPastedText(currentValue.current, changedValue);
       if (passedText) {
         onValuePasted(passedText);
       }

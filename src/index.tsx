@@ -1,4 +1,5 @@
 export * from './modules/OtpReceiver';
+export * from './types';
 
 export type { SMSData } from './specs/NativeOtpReceiver';
 export {

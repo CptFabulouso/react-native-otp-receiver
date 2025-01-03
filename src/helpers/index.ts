@@ -1,4 +1,4 @@
-export function getPassedText(current: string | undefined, next: string) {
+export function getPastedText(current: string | undefined, next: string) {
   if (!next || next.length <= 1) {
     return;
   }
@@ -9,11 +9,11 @@ export function getPassedText(current: string | undefined, next: string) {
   const endsWith = next.endsWith(current);
   if (startsWith && endsWith) {
     // There is no way to be sure which part of the string was really copied, assume it's the end
-    return next.substring(1);
+    return next.substring(current.length);
   } else if (startsWith) {
-    return next.substring(1);
+    return next.substring(current.length);
   } else if (endsWith) {
-    return next.substring(0, next.length - 1);
+    return next.substring(0, next.length - current.length);
   } else {
     return next;
   }
