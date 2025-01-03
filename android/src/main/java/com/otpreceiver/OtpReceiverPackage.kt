@@ -24,7 +24,7 @@ class OtpReceiverPackage : BaseReactPackage() {
         OtpReceiverModule.NAME,
         false,  // canOverrideExistingModule
         false,  // needsEagerInit
-        true,  // hasConstants
+        false,  // hasConstants
         false,  // isCxxModule
         true // isTurboModule
       )

@@ -1,5 +1,13 @@
-import OtpReceiver from './NativeOtpReceiver';
+export * from './modules/OtpReceiver';
 
-export function multiply(a: number, b: number): number {
-  return OtpReceiver.multiply(a, b);
-}
+export type { SMSData } from './specs/NativeOtpReceiver';
+export {
+  default as OTPInputHandler,
+  type CodeInputCellComponentProps,
+} from './components/OTPInputHandler';
+export { default as OTPProvider } from './components/OTPProvider';
+export {
+  default as OTPInputCell,
+  useOTPInputCellState,
+  type OTPInputProps,
+} from './components/OTPInputCell';
