@@ -1,11 +1,9 @@
 import { useCallback, type ReactElement } from 'react';
 import type { OTPInputProps } from './OTPInputCell';
-import OTPProvider, { useOTPContextSelect } from './OTPProvider';
-import type {
-  CodeCharValidator,
-  OnCodeEnteredData,
-  OnSubmitCodeData,
-} from '../types';
+import OTPProvider, {
+  useOTPContextSelect,
+  type OTPProviderProps,
+} from './OTPProvider';
 
 type ChildrenProps = {
   codeValue: string[];
@@ -16,19 +14,14 @@ type ChildrenProps = {
 
 export type CodeInputCellComponentProps = OTPInputProps;
 
-type Props = {
-  codeInputShape: number[];
+type Props = Omit<OTPProviderProps, 'children'> & {
+  /** The UI to render */
   children?: (renderProps: ChildrenProps) => ReactElement;
+
+  /** The UI component to render as an input cell */
   CodeInputCellComponent: (
     otpHandles: CodeInputCellComponentProps
   ) => ReactElement;
-  onCodeEntered?: (data: OnCodeEnteredData) => void;
-  onSubmitCode?: (data: OnSubmitCodeData) => void;
-  parseSMS?: (sms: string) => string | null | undefined;
-  parseEnteredCodeChar?: (char: string) => string;
-  parsePastedCode?: (code: string, codeInputShape: number[]) => string[];
-  validateCodeChar?: CodeCharValidator;
-  expectSMSOnMount?: boolean;
 };
 
 export default function OTPInputHandler({

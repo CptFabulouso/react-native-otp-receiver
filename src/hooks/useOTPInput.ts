@@ -1,6 +1,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { runCodeCharValidator } from '../helpers';
-import type { CodeCharValidator, CodeInputOrigin } from '../types';
+import type {
+  CodeCharValidator,
+  CodeInputOrigin,
+  OnCodeEnteredData,
+  OnSubmitCodeData,
+} from '../types';
 
 function stringValueToArray(
   value: string,
@@ -30,12 +35,8 @@ export function useOTPInput({
   codeInputShape: number[];
   value?: string;
   automaticallySubmit?: boolean;
-  handleCodeEntered?: (data: { code: string; origin: CodeInputOrigin }) => void;
-  handleSubmitCode?: (data: {
-    isValid: boolean;
-    code: string;
-    origin: CodeInputOrigin;
-  }) => void;
+  handleCodeEntered?: (data: OnCodeEnteredData) => void;
+  handleSubmitCode?: (data: OnSubmitCodeData) => void;
   parseEnteredCodeChar?: (code: string) => string;
   validateCodeChar?: CodeCharValidator;
 }) {

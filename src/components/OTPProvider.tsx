@@ -49,17 +49,44 @@ const Context = createContext<OTPContext>({
   submitCode: () => {},
 });
 
-type Props = {
+export type OTPProviderProps = {
+  /**
+   * Shape for the code input. Number values in the array say how many characters are in each input cell.
+   * E.g. [1,1,1,1] is 4 cells with single char in each cell.
+   * [3, 3] are 3 chars in two cells
+   * */
   codeInputShape: number[];
+
   children?: ReactNode;
+
+  /** Function called after user fills in the code in it's full length */
   onCodeEntered?: (data: OnCodeEnteredData) => void;
+
+  /** Function called after user fills in the code in it's full length. In this callback you should do your code validation */
   onSubmitCode?: (data: OnSubmitCodeData) => void;
+
+  /** Called whenever the code value changes */
+  onCodeChanged?: (code: string) => void;
+
+  /** Called when onSMSReceived returns error */
   onSMSError?: (error: string) => void;
+
+  /** (Android only) Function called when user receives the SMS and expects you to return the code extracted from it */
   parseSMS?: (sms: string) => string | null | undefined;
+
+  /** Modify the entered char that user enters via keyboard. E.g. to capitalize it */
   parseEnteredCodeChar?: (char: string) => string;
+
+  /** When user pastes copied (or suggested) value, here you can parse the value into input cells. E.g. to parse ABC-XYZ into ['ABC', 'XYZ'] */
   parsePastedCode?: (code: string, codeInputShape: number[]) => string[];
+
+  /** Each time the code changes, you can validate it. This code runs for each entered character. E.g. to only accept numbers */
   validateCodeChar?: CodeCharValidator;
+
+  /** Use to set the code input value manually */
   value?: string;
+
+  /** Whether to automatically call expectSMSWithOTP. If not set to true, you must call expectSMSWithOTP manually */
   expectSMSOnMount?: boolean;
 };
 
@@ -94,7 +121,7 @@ export default function OTPProvider({
   validateCodeChar,
   onSMSError,
   parsePastedCode = defaultPasteParser,
-}: Props) {
+}: OTPProviderProps) {
   const {
     codeValue,
     submitCode,

@@ -125,10 +125,10 @@ We try to assume as little as possible about what your code looks like and you s
 | Prop | Required | Type | Description | Default |
 |---|---|---|---|---|
 | codeInputShape | **Yes** | number[] | Shape for the code input. Number values in the array say how many characters are in each input cell.<br>E.g. [1,1,1,1] is 4 cells with single char in each cell. <br>[3, 3] are 3 chars in two cells | - |
-| CodeInputCellComponent | **Yes** | Component\<CodeInputCellComponentProps> | The UI component to render as an input cell | - |
 | children | **No** | `ReactNode` | The UI to render | - |
 | onCodeEntered | No | `(data: OnCodeEnteredData) => void` |Function called after user fills in the code in it's full length | - |
 | onSubmitCode | No | `(data: OnSubmitCodeData) => void;` | Function called after user fills in the code in it's full length. In this callback you should do your code validation | - |
+| onCodeChanges | No | `(code: string) => void` | Called whenever the code value changes | - |
 | parseSMS | No | `(sms: string) => string \| null \| undefined` | (Android only) Function called when user receives the SMS and expects you to return the code extracted from it | - |
 | expectSMSOnMount | No | boolean | Whether to automatically call `expectSMSWithOTP`. If not set to true, you must call `expectSMSWithOTP` manually | - |
 | value | No | string | Use to set the code input value manually | - |
@@ -185,7 +185,6 @@ function CodeInputComponent({ index }: { index: number }) {
 
 [Full example](./example/src/OTPProviderExample.tsx) in the example app
 
-
 #### With `OTPInputHandler`
 
 Wraps the `OTPProvider`, some may prefer this implementation over using the provider.
@@ -197,8 +196,7 @@ Wraps the `OTPProvider`, some may prefer this implementation over using the prov
 | Prop | Required | Type | Description |
 |---|---|---|---|
 | children | **Yes** | `(props: RenderProps) => ReactNode` | The UI to render |
-
-Example:
+| CodeInputCellComponent | **Yes** |`(otpHandles: CodeInputCellComponentProps) => ReactElement` | The UI component to render as an input cell |
 
 ```tsx
 import { View, Button, TouchableOpacity } from 'react-native';

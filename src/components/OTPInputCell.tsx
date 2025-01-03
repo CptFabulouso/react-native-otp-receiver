@@ -3,6 +3,7 @@ import { TextInput, Platform } from 'react-native';
 import { useOTPInputCell } from '../hooks';
 
 export type OTPInputProps = {
+  /** Index of the cell component */
   index: number;
 };
 
