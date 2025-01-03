@@ -25,28 +25,12 @@ type Props = Omit<OTPProviderProps, 'children'> & {
 };
 
 export default function OTPInputHandler({
-  codeInputShape,
   children,
-  onCodeEntered,
   CodeInputCellComponent,
-  onSubmitCode,
-  parseSMS,
-  parseEnteredCodeChar,
-  parsePastedCode,
-  validateCodeChar,
-  expectSMSOnMount,
+  ...providerProps
 }: Props) {
   return (
-    <OTPProvider
-      codeInputShape={codeInputShape}
-      onCodeEntered={onCodeEntered}
-      onSubmitCode={onSubmitCode}
-      parseSMS={parseSMS}
-      parseEnteredCodeChar={parseEnteredCodeChar}
-      parsePastedCode={parsePastedCode}
-      validateCodeChar={validateCodeChar}
-      expectSMSOnMount={expectSMSOnMount}
-    >
+    <OTPProvider {...providerProps}>
       <Handler CodeInputCellComponent={CodeInputCellComponent}>
         {children}
       </Handler>
