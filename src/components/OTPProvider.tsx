@@ -121,6 +121,7 @@ export default function OTPProvider({
   validateCodeChar,
   onSMSError,
   parsePastedCode = defaultPasteParser,
+  onCodeChanged,
 }: OTPProviderProps) {
   const {
     codeValue,
@@ -130,6 +131,7 @@ export default function OTPProvider({
     onValueChange,
     isValid,
   } = useOTPInput({
+    onCodeChanged,
     codeInputShape,
     value,
     handleCodeEntered: onCodeEntered,

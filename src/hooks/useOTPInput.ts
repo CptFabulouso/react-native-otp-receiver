@@ -31,6 +31,7 @@ export function useOTPInput({
   handleCodeEntered,
   parseEnteredCodeChar,
   validateCodeChar,
+  onCodeChanged,
 }: {
   codeInputShape: number[];
   value?: string;
@@ -38,6 +39,7 @@ export function useOTPInput({
   handleCodeEntered?: (data: OnCodeEnteredData) => void;
   handleSubmitCode?: (data: OnSubmitCodeData) => void;
   parseEnteredCodeChar?: (code: string) => string;
+  onCodeChanged?: (code: string) => void;
   validateCodeChar?: CodeCharValidator;
 }) {
   const [codeValue, setCodeValue] = useState<string[]>(
@@ -53,8 +55,9 @@ export function useOTPInput({
         validateCodeChar
       );
       setCodeValue(codeValueRef.current);
+      onCodeChanged?.(code);
     },
-    [codeInputShape, validateCodeChar]
+    [codeInputShape, onCodeChanged, validateCodeChar]
   );
 
   useEffect(() => {
@@ -106,6 +109,7 @@ export function useOTPInput({
       nextCodeValue[index] = nextCellValue;
       codeValueRef.current = nextCodeValue;
       setCodeValue(codeValueRef.current);
+      onCodeChanged?.(codeValueRef.current.join(''));
 
       let nextIndex: number | null = null;
       if (key === 'Backspace' && nextCellValue.length === 0) {
@@ -126,6 +130,7 @@ export function useOTPInput({
     },
     [
       codeInputShape,
+      onCodeChanged,
       isCodeValid,
       parseEnteredCodeChar,
       handleCodeEntered,
