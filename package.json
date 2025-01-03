@@ -35,7 +35,8 @@
     "!**/__tests__",
     "!**/__fixtures__",
     "!**/__mocks__",
-    "!**/.*"
+    "!**/.*",
+    "./scripts/*"
   ],
   "bin": "./scripts/cli.js",
   "scripts": {
