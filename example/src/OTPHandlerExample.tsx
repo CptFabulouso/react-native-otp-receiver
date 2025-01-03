@@ -12,11 +12,12 @@ const getCodeFromSMS = (sms: string) => {
 };
 
 const isCharValidRegex = /^[a-zA-Z0-9]$|^Backspace$/;
+const SHAPE = [1, 1, 1, 1, 1, 1];
 
 export default function OTPInputHandlerExample() {
   return (
     <OTPInputHandler
-      codeInputShape={[1, 1, 1, 1, 1, 1]}
+      codeInputShape={SHAPE}
       CodeInputCellComponent={CodeInputComponent}
       onCodeEntered={(code) => {
         console.log('Code Entered', code);

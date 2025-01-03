@@ -46,6 +46,7 @@ export function useOTPInput({
     stringValueToArray(value || '', codeInputShape, validateCodeChar)
   );
   const codeValueRef = useRef<string[]>(codeValue);
+  const prevValue = useRef<string | undefined>(value);
 
   const _setCodeValue = useCallback(
     (code: string) => {
@@ -61,7 +62,10 @@ export function useOTPInput({
   );
 
   useEffect(() => {
-    _setCodeValue(value || '');
+    if (value !== prevValue.current) {
+      _setCodeValue(value || '');
+    }
+    prevValue.current = value;
   }, [_setCodeValue, value]);
 
   const isCodeValid = useCallback(
