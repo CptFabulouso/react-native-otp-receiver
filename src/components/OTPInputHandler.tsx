@@ -1,7 +1,6 @@
 import { useCallback, type ReactElement } from 'react';
 import type { OTPInputProps } from './OTPInputCell';
 import OTPProvider, { useOTPContextSelect } from './OTPProvider';
-import { View } from 'react-native';
 import type {
   CodeCharValidator,
   OnCodeEnteredData,
@@ -72,13 +71,11 @@ function Handler({
   const submitCode = useOTPContextSelect((v) => v.submitCode);
 
   const renderOTPInput = useCallback(() => {
-    return codeInputs.map((_, index) => (
-      <View key={index}>
-        {CodeInputCellComponent({
-          index,
-        })}
-      </View>
-    ));
+    return codeInputs.map((_, index) =>
+      CodeInputCellComponent({
+        index,
+      })
+    );
   }, [CodeInputCellComponent, codeInputs]);
 
   return (

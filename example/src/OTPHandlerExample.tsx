@@ -46,6 +46,7 @@ function CodeInputComponent(inputHandles: CodeInputCellComponentProps) {
 
   return (
     <TouchableOpacity
+      key={inputHandles.index}
       style={[
         styles.otpWrapper,
         {
