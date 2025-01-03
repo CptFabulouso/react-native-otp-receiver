@@ -5,7 +5,11 @@ import OTPProvider, {
   useOTPInputContext,
 } from './OTPProvider';
 import { View, TextInput } from 'react-native';
-import type { CodeCharValidator } from '../types';
+import type {
+  CodeCharValidator,
+  OnCodeEnteredData,
+  OnSubmitCodeData,
+} from '../types';
 
 type ChildrenProps = {
   codeValue: string[];
@@ -19,19 +23,14 @@ export type CodeInputCellComponentProps = OTPInputProps & {
   getRef: () => TextInput | null;
 };
 
-type Origin = 'manual' | 'sms' | 'cta';
 type Props = {
   codeInputShape: number[];
   children?: (renderProps: ChildrenProps) => ReactElement;
   CodeInputCellComponent: (
     otpHandles: CodeInputCellComponentProps
   ) => ReactElement;
-  onCodeEntered?: (data: { code: string; origin: Origin }) => void;
-  onSubmitCode?: (data: {
-    isValid: boolean;
-    code: string;
-    origin: Origin;
-  }) => void;
+  onCodeEntered?: (data: OnCodeEnteredData) => void;
+  onSubmitCode?: (data: OnSubmitCodeData) => void;
   parseSMS?: (sms: string) => string | null | undefined;
   parseEnteredCodeChar?: (char: string) => string;
   parsePastedCode?: (code: string, codeInputShape: number[]) => string[];

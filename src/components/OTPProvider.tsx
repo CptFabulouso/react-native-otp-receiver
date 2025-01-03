@@ -10,7 +10,11 @@ import { useCodeInput } from '../hooks';
 import type { TextInput } from 'react-native';
 import { onSMSReceived, expectSMSWithOTP } from '../modules/OtpReceiver';
 import { runCodeCharValidator } from '../helpers';
-import type { CodeCharValidator, CodeInputOrigin } from '../types';
+import type {
+  CodeCharValidator,
+  OnCodeEnteredData,
+  OnSubmitCodeData,
+} from '../types';
 
 type OTPInputContextValue = {
   onValueChange: (key: string, index: number) => void;
@@ -48,12 +52,8 @@ const Context = createContext<OTPContext>({
 type Props = {
   codeInputShape: number[];
   children?: ReactNode;
-  onCodeEntered?: (data: { code: string; origin: CodeInputOrigin }) => void;
-  onSubmitCode?: (data: {
-    isValid: boolean;
-    code: string;
-    origin: CodeInputOrigin;
-  }) => void;
+  onCodeEntered?: (data: OnCodeEnteredData) => void;
+  onSubmitCode?: (data: OnSubmitCodeData) => void;
   parseSMS?: (sms: string) => string | null | undefined;
   parseEnteredCodeChar?: (char: string) => string;
   parsePastedCode?: (code: string, codeInputShape: number[]) => string[];
