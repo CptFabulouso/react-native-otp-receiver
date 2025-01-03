@@ -1,6 +1,6 @@
 {
   "name": "react-native-otp-receiver",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Receive OTP from SMS message",
   "source": "./src/index.tsx",
   "main": "./lib/commonjs/index.js",
