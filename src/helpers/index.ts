@@ -28,6 +28,9 @@ export function runCodeCharValidator(
   if (!validator) {
     return true;
   }
+  if (/^Backspace$/.test(char)) {
+    return true;
+  }
   if (validator instanceof RegExp) {
     return validator.test(char);
   }

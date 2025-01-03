@@ -17,7 +17,7 @@ const toUpperCase = (char: string) => {
 
 const shape = [3, 3];
 
-const isCharValidRegex = /^[a-zA-Z0-9]$|^Backspace$/;
+const isCharValidRegex = /^[a-zA-Z0-9]$/;
 
 export default function OTPProviderExample() {
   return (

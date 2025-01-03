@@ -11,7 +11,7 @@ const getCodeFromSMS = (sms: string) => {
   return sms.match(/\d{6}/)?.[0] || '';
 };
 
-const isCharValidRegex = /^[a-zA-Z0-9]$|^Backspace$/;
+const isCharValidRegex = /^[a-zA-Z0-9]$/;
 const SHAPE = [1, 1, 1, 1, 1, 1];
 
 export default function OTPInputHandlerExample() {
@@ -59,7 +59,11 @@ function CodeInputComponent(inputHandles: CodeInputCellComponentProps) {
         getRef()?.focus();
       }}
     >
-      <OTPInputCell {...inputHandles} style={styles.otpInput} />
+      <OTPInputCell
+        {...inputHandles}
+        style={styles.otpInput}
+        keyboardType="number-pad"
+      />
     </TouchableOpacity>
   );
 }
