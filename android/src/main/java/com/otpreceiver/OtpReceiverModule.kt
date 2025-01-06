@@ -21,7 +21,6 @@ import com.google.android.gms.auth.api.phone.SmsRetrieverClient
 import com.google.android.gms.tasks.Task
 
 const val HINT_RESOLVE_CODE = 100
-const val TAG = "OtpReceiverModule"
 
 @ReactModule(name = OtpReceiverModule.NAME)
 class OtpReceiverModule(private val reactContext: ReactApplicationContext) :
@@ -35,8 +34,7 @@ class OtpReceiverModule(private val reactContext: ReactApplicationContext) :
   private var smsClient: SmsRetrieverClient = SmsRetriever.getClient(reactContext)
   private var smsReceiverRegistered = false
   private val smsReceiver = SmsBroadcastReceiver()
-
-
+  
   override fun getName(): String {
     return NAME
   }
@@ -60,11 +58,11 @@ class OtpReceiverModule(private val reactContext: ReactApplicationContext) :
         try {
           activity.startIntentSenderForResult(result.intentSender, HINT_RESOLVE_CODE, null, 0, 0, 0)
         } catch (e: Exception) {
-          Log.e(TAG, e.message ?: "Launching the Intent failed")
+          Log.e(NAME, e.message ?: "Launching the Intent failed")
         }
       }
       .addOnFailureListener {
-        Log.e(TAG, "Phone Number Hint failed")
+        Log.e(NAME, "Phone Number Hint failed")
       }
   }
 
