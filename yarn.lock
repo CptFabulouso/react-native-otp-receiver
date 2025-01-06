@@ -10751,6 +10751,7 @@ __metadata:
     react-native: 0.76.5
     react-native-builder-bob: ^0.32.0
     release-it: ^17.10.0
+    scheduler: ^0.25.0
     turbo: ^1.10.7
     typescript: ^5.2.2
     use-context-selector: ^2.0.0
@@ -11380,6 +11381,13 @@ __metadata:
   dependencies:
     loose-envify: ^1.1.0
   checksum: 232149125c10f10193b1340ec4bbf14a8e6a845152790d6fd6f58207642db801abdb5a21227561a0a93871b98ba47539a6233b4e6155aae72d6db6db9f9f09b3
+  languageName: node
+  linkType: hard
+
+"scheduler@npm:^0.25.0":
+  version: 0.25.0
+  resolution: "scheduler@npm:0.25.0"
+  checksum: b7bb9fddbf743e521e9aaa5198a03ae823f5e104ebee0cb9ec625392bb7da0baa1c28ab29cee4b1e407a94e76acc6eee91eeb749614f91f853efda2613531566
   languageName: node
   linkType: hard
 

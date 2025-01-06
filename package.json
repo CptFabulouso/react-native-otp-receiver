@@ -209,6 +209,7 @@
     "version": "0.45.5"
   },
   "dependencies": {
+    "scheduler": "^0.25.0",
     "use-context-selector": "^2.0.0"
   }
 }
