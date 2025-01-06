@@ -33,7 +33,9 @@ class OtpReceiverModule(private val reactContext: ReactApplicationContext) :
 
   private var hintPromise: Promise? = null
   private var smsClient: SmsRetrieverClient = SmsRetriever.getClient(reactContext)
+  private var smsReceiverRegistered = false
   private val smsReceiver = SmsBroadcastReceiver()
+
 
   override fun getName(): String {
     return NAME
@@ -83,6 +85,9 @@ class OtpReceiverModule(private val reactContext: ReactApplicationContext) :
 
   @SuppressLint("UnspecifiedRegisterReceiverFlag")
   private fun registerReceiver(){
+    if(smsReceiverRegistered){
+      return;
+    }
     val intentFilter = IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION)
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
       reactContext.registerReceiver(
@@ -92,10 +97,15 @@ class OtpReceiverModule(private val reactContext: ReactApplicationContext) :
     } else {
       reactContext.registerReceiver(smsReceiver, intentFilter)
     }
+    smsReceiverRegistered = true;
   }
 
   private fun unregisterReceiver(){
+    if(!smsReceiverRegistered){
+      return
+    }
     reactContext.unregisterReceiver(smsReceiver)
+    smsReceiverRegistered = false
   }
 
   /* --ActivityEventListener Start-- */
