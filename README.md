@@ -105,7 +105,7 @@ const res = await expectSMSWithOTP()
 
 #### `requestPhoneHint`
 
-Calling this function will display prompt for user to select his phone number.
+Calling this function will display prompt for user to select his own phone number.
 
 ```ts
 import { requestPhoneHint } from 'react-native-otp-receiver';
