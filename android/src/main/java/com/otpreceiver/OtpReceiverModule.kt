@@ -34,7 +34,7 @@ class OtpReceiverModule(private val reactContext: ReactApplicationContext) :
   private var smsClient: SmsRetrieverClient = SmsRetriever.getClient(reactContext)
   private var smsReceiverRegistered = false
   private val smsReceiver = SmsBroadcastReceiver()
-  
+
   override fun getName(): String {
     return NAME
   }
@@ -48,7 +48,7 @@ class OtpReceiverModule(private val reactContext: ReactApplicationContext) :
   }
 
   override fun requestPhoneHint(promise: Promise){
-    val activity = currentActivity ?: return
+    val activity = reactApplicationContext.currentActivity ?: return
     val request = GetPhoneNumberHintIntentRequest.builder().build()
     hintPromise = promise;
 
@@ -107,11 +107,16 @@ class OtpReceiverModule(private val reactContext: ReactApplicationContext) :
   }
 
   /* --ActivityEventListener Start-- */
-  override fun onActivityResult(activity: Activity?, requestCode: Int, resultCode: Int, intent: Intent?) {
+  override fun onActivityResult(
+    activity: Activity,
+    requestCode: Int,
+    resultCode: Int,
+    data: Intent?
+  ) {
     if(requestCode == HINT_RESOLVE_CODE){
       if(resultCode == AppCompatActivity.RESULT_OK){
         try {
-          val phoneNumber = Identity.getSignInClient(reactContext).getPhoneNumberFromIntent(intent)
+          val phoneNumber = Identity.getSignInClient(reactContext).getPhoneNumberFromIntent(data)
           hintPromise?.resolve(phoneNumber)
         } catch (e: Exception) {
           hintPromise?.reject("HINT_FAILED", e.message)
@@ -122,7 +127,7 @@ class OtpReceiverModule(private val reactContext: ReactApplicationContext) :
     }
   }
 
-  override fun onNewIntent(p0: Intent?) {
+  override fun onNewIntent(intent: Intent) {
     // nothing to do
   }
   /* --ActivityEventListener End-- */

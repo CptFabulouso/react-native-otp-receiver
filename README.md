@@ -42,6 +42,11 @@ This package handles receiving and filling OTP from SMS message. While automatic
 
 This libs is currently available only for the new arch.
 
+| react-native-otp-receiver | React Native |
+| --- | --- |
+| 2.x | 0.81.4 |
+| 1.x | 0.76.5 |
+
 ## Installation
 
 ```sh
