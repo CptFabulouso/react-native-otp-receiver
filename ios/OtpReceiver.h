@@ -1,4 +1,5 @@
-#import "generated/RNOtpReceiverSpec/RNOtpReceiverSpec.h"
+#import <RNOtpReceiverSpec/RNOtpReceiverSpec.h>
+
 
 @interface OtpReceiver : NSObject <NativeOtpReceiverSpec>
 
