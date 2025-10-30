@@ -46,7 +46,7 @@ This libs is currently available only for the new arch.
 | --- | --- |
 | 2.x | 0.81.4 |
 | 1.x | 0.76.5 |
-
+ya
 ## Installation
 
 ```sh

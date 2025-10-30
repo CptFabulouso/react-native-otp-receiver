@@ -1,9 +1,5 @@
 import { useCallback, useMemo, useRef } from 'react';
-import type {
-  NativeSyntheticEvent,
-  TextInputKeyPressEventData,
-} from 'react-native';
-import { TextInput } from 'react-native';
+import { TextInput, type TextInputKeyPressEvent } from 'react-native';
 import { getPastedText } from '../helpers';
 import {
   useOTPContextSelect,
@@ -29,9 +25,7 @@ export function useOTPInputCell({ index }: { index: number }) {
   const currentValue = useRef(value);
   currentValue.current = value;
 
-  const handleKeyPress = ({
-    nativeEvent,
-  }: NativeSyntheticEvent<TextInputKeyPressEventData>) => {
+  const handleKeyPress = ({ nativeEvent }: TextInputKeyPressEvent) => {
     // use last entered character
     onValueChange?.(nativeEvent.key, index);
   };
